@@ -44,6 +44,15 @@ type Torrent struct {
 	IsFinished    bool    `json:"isFinished"`
 	PercentDone   float64 `json:"percentDone"`
 	SeedRatioMode int     `json:"seedRatioMode"`
+	Files         []tFile `json:"files"`
+}
+
+//File struct for files
+type tFile struct {
+	Key            string `json:"key"`
+	BytesCompleted int    `json:"bytesCompleted"`
+	Size           int    `json:"length"`
+	Name           string `json:"name"`
 }
 
 //TorrentAdded data returning
@@ -68,7 +77,7 @@ func (ac *TransmissionClient) GetTorrents() ([]Torrent, error) {
 	getCommand.Arguments.Fields = []string{"id", "name",
 		"status", "leftUntilDone", "eta", "uploadRatio",
 		"rateDownload", "rateUpload", "downloadDir",
-		"isFinished", "percentDone", "seedRatioMode"}
+		"isFinished", "percentDone", "seedRatioMode", "files"}
 	body, err := json.Marshal(getCommand)
 	if err != nil {
 		return []Torrent{}, err

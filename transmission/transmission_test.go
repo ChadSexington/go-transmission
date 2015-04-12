@@ -36,7 +36,7 @@ func teardown() {
 
 func TestGetTorrents(t *testing.T) {
 	setup(`{"arguments":{"torrents":[{"eta":-1,"id":5,
-  "leftUntilDone":0,"name":"Test",
+  "leftUntilDone":0,"name":"Test", "files":[],
   "rateDownload":0,"rateUpload":0,"status":6,"uploadRatio":0.3114}]},
   "result":"success"}`)
 	defer teardown()
