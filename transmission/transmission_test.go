@@ -59,7 +59,7 @@ func TestRemoveTorrent(t *testing.T) {
 	})
 }
 
-func TestAddTorrent(t *testing.T) {
+func TestAddTorrentByFile(t *testing.T) {
 	setup(`{"arguments":{"torrent-added":
   {"hashString":"875a2d90068c32b4ce7992eaf56cd03f5be0d193",
   "id":23,"name":"Test Name"}}
@@ -67,9 +67,9 @@ func TestAddTorrent(t *testing.T) {
 	defer teardown()
 
 	Convey("Test adding torrent", t, func() {
-		addedTorrent, err := transmissionClient.AddTorrent("/tmp/file", "/home/lnguyen")
+		addedTorrent, err := transmissionClient.AddTorrentByFile("/tmp/file", "/home/lnguyen")
 		So(err, ShouldBeNil)
 		So(addedTorrent.Name, ShouldEqual, "Test Name")
-		So(addedTorrent.Id, ShouldEqual, 23)
+		So(addedTorrent.ID, ShouldEqual, 23)
 	})
 }
