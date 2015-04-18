@@ -93,6 +93,20 @@ func (ac *TransmissionClient) GetTorrents() ([]Torrent, error) {
 	return outputCommand.Arguments.Torrents, nil
 }
 
+func (ac *TransmissionClient) GetDownloadedTorrents() ([]Torrent, error) {
+	all, err := ac.GetTorrents()
+	if err != nil {
+		return []Torrent{}, err
+	}
+	downloaded := []Torrent{}
+	for x := 0; x < len(all); x++ {
+		if all[x].LeftUntilDone == 0 {
+			downloaded = append(downloaded, all[x])
+		}
+	}
+	return downloaded, nil
+}
+
 //RemoveTorrent remove the torrents
 func (ac *TransmissionClient) RemoveTorrent(id int, removeFile bool) (string, error) {
 	var removeCommand command
