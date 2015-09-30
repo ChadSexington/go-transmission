@@ -44,11 +44,11 @@ type Torrent struct {
 	IsFinished    bool    `json:"isFinished"`
 	PercentDone   float64 `json:"percentDone"`
 	SeedRatioMode int     `json:"seedRatioMode"`
-	Files         []tFile `json:"files"`
+	Files         []TFile `json:"files"`
 }
 
 //File struct for files
-type tFile struct {
+type TFile struct {
 	Key            string `json:"key"`
 	BytesCompleted int    `json:"bytesCompleted"`
 	Size           int    `json:"length"`
